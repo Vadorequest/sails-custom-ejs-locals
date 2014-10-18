@@ -60,5 +60,5 @@ Now, if you want to make sure it works with my plugin, please run the following 
 
 `cd node_modules\sails\node_modules && npm install git+https://git@github.com/Vadorequest/ejs-locals.git`
 
-You also will have to rename the folder caller `ejs-locals-vadorequest` to `ejs-locals` in the `sails/node_module/` folder. Then restart the server, and it will work by displaying `This has been included from included.ejs`.
+You also will have to rename the folder called `ejs-locals-vadorequest` to `ejs-locals` in the `sails/node_module/` folder. Then restart the server, and it will work by displaying `This has been included from included.ejs`.
 
