@@ -15,13 +15,13 @@ error: Sending 500 ("Server Error") response:
     11|
 
 c:\wamp\www\sails-custom-ejs-locals\views\layout\_partials\body.ejs:1
- >> 1| <%- partial('this_should_genarate_an_error_from_my_own_ejs_locals_lib')%>
+ >> 1| <%- partial('/layout/_partials/included')%>
     2|
 
-Could not find partial this_should_genarate_an_error_from_my_own_ejs_locals_lib
+Could not find partial /layout/_partials/included
     at Object.partial (c:\wamp\www\sails-custom-ejs-locals\node_modules\sails\node_modules\ejs-locals\index.js:311:11)
     at eval (eval at <anonymous> (c:\wamp\www\sails-custom-ejs-locals\node_modules\ejs\lib\ejs.js:237:14), <anonymous>:29:35)
-    at eval (eval at <anonymous> (c:\wamp\www\sails-custom-ejs-locals\node_modules\ejs\lib\ejs.js:237:14), <anonymous>:29:114)
+    at eval (eval at <anonymous> (c:\wamp\www\sails-custom-ejs-locals\node_modules\ejs\lib\ejs.js:237:14), <anonymous>:29:84)
     at c:\wamp\www\sails-custom-ejs-locals\node_modules\ejs\lib\ejs.js:250:15
     at Object.exports.render (c:\wamp\www\sails-custom-ejs-locals\node_modules\ejs\lib\ejs.js:288:13)
     at render (c:\wamp\www\sails-custom-ejs-locals\node_modules\sails\node_modules\ejs-locals\index.js:334:20)
@@ -37,10 +37,10 @@ Could not find partial this_should_genarate_an_error_from_my_own_ejs_locals_lib
     11|
 
 c:\wamp\www\sails-custom-ejs-locals\views\layout\_partials\body.ejs:1
- >> 1| <%- partial('this_should_genarate_an_error_from_my_own_ejs_locals_lib')%>
+ >> 1| <%- partial('/layout/_partials/included')%>
     2|
 
-Could not find partial this_should_genarate_an_error_from_my_own_ejs_locals_lib]
+Could not find partial /layout/_partials/included]
   path: 'c:\\wamp\\www\\sails-custom-ejs-locals\\views\\layout\\default.ejs' }
 
 ```
@@ -48,10 +48,17 @@ Could not find partial this_should_genarate_an_error_from_my_own_ejs_locals_lib]
 The issue is that here:
 
 ```
-Could not find partial this_should_genarate_an_error_from_my_own_ejs_locals_lib
+Could not find partial /layout/_partials/included
     at Object.partial (c:\wamp\www\sails-custom-ejs-locals\node_modules\sails\node_modules\ejs-locals\index.js:311:11)
 ```
 
 The path should be `at Object.partial (c:\wamp\www\sails-custom-ejs-locals\node_modules\ejs-locals-vadorequest\index.js:311:11)`
 
-But it's not, so it proves that even if I write `fn: require('ejs-locals-vadorequest')` in the `config/views.js` it doesn't change anything.
+But it's not, so it proves that even if I have set a custom config in the `config/views.js` it doesn't change anything.
+
+Now, if you want to make sure it works with my plugin, please run the following command from the root folder:
+
+`cd node_modules\sails\node_modules && npm install git+https://git@github.com/Vadorequest/ejs-locals.git`
+
+You also will have to rename the folder caller `ejs-locals-vadorequest` to `ejs-locals` in the `sails/node_module/` folder. Then restart the server, and it will work by displaying `This has been included from included.ejs`.
+

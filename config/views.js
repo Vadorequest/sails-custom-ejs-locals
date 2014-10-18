@@ -30,8 +30,10 @@ module.exports.views = {
   *                                                                           *
   ****************************************************************************/
 
-  engine: 'ejs',
-  fn: require('ejs-locals-vadorequest'),
+  engine: {
+    ext: 'ejs',
+    fn: require('ejs-locals-vadorequest')
+  },
 
 
   /****************************************************************************
